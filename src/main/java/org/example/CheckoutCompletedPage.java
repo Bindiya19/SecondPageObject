@@ -11,9 +11,8 @@ public class CheckoutCompletedPage extends Utils {
         Assert.assertEquals(actualMsg, expectedMsg, "Message does not match!");
 
     }
-    public void orderNumDisplay(){
-       // Assert.assertEquals(getTextFromElement(By.xpath("strong[contains(text(),'Order number: 1031')]"),String = "Order number: 1031","";
-    }
+    public void orderNumIsDisplay(){
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='order-number']/strong[contains(text(),'Order number')]")).isDisplayed(),"ORDER NUMBER IS NOT DISPLAYED!");
 
+    }
 }
-//"strong[contains(text(),'Order number: 1031')]"

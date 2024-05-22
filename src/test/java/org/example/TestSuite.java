@@ -43,16 +43,16 @@ public class TestSuite extends BaseTest {//extends class to call method open and
    //LoginPage loginPage = new LoginPage();
 
     //create obj to call ElectronicsPage class's methods
-    //ElectronicsPage electronicsPage = new ElectronicsPage();
+    ElectronicsPage electronicsPage = new ElectronicsPage();
 
     //create obj to call CameraAndPhotoPage class's methods
-    //CameraAndPhotoPage cameraAndPhotoPage = new CameraAndPhotoPage();
+    CameraAndPhotoPage cameraAndPhotoPage = new CameraAndPhotoPage();
 
     //create obj to call LeicaT_MirrorlessDigital_CameraPage class's methods
-    //LeicaT_MirrorlessDigital_CameraPage leicaTMirrorlessDigitalCameraPage = new LeicaT_MirrorlessDigital_CameraPage();
+    LeicaT_MirrorlessDigital_CameraPage leicaTMirrorlessDigitalCameraPage = new LeicaT_MirrorlessDigital_CameraPage();
 
     //create obj to call ProductEmailAFriendPage class's methods
-    //ProductEmailAFriendPage productEmailAFriendPage = new ProductEmailAFriendPage();
+    ProductEmailAFriendPage productEmailAFriendPage = new ProductEmailAFriendPage();
 
     //create obj to  call buildYourOwnComputerPage class's methods
     //BuildYourOwnComputerPage buildYourOwnComputerPage = new BuildYourOwnComputerPage();
@@ -69,7 +69,7 @@ public class TestSuite extends BaseTest {//extends class to call method open and
     //FacebookPage facebookPage = new FacebookPage();
 
     //create obj to call NopcommerceNewRelease  class's methods
-    //NopcommerceNewRelease nopcommerceNewRelease = new NopcommerceNewRelease();
+    NopcommerceNewRelease nopcommerceNewRelease = new NopcommerceNewRelease();
 
     //create obj to call NikePage class's methods
     Search_q_Page search_q_page= new Search_q_Page();
@@ -93,17 +93,20 @@ public class TestSuite extends BaseTest {//extends class to call method open and
     @Test
     public void verifyUsersShouldAbleToSearchAnyProductAndEachProductTitleContainSearchedWord(){
         //type product name
-        homePage.typeBrandName();
+        homePage.typeBrandName("nike");
         //to click on Search button
         homePage.clickSearchButton();
-        //each product contain same brand name
-        search_q_page.productsTitleContainSearchedWord();
+        //each product contain searched brand name
+       search_q_page.productsTitleContainSearchedWord("Nike");
+       //get current page url
+        search_q_page.presentUrlContainSearchedWorld("nike");
+
 
     }
 
     @Test
     public void guestUserShouldBeCheckOutSuccessfullyHTCOneM8AndroidLollipop(){
-        //click On HTC One M8 Android Lollipop's ADD TO CART Button
+        //click ADD TO CART Button under HTC One M8 Android Lollipop
         homePage.clickOnHTCAndroidADDTOCARTButton();
         //click on shopping cart
         homePage.clickOnShoppingCart();
@@ -112,20 +115,52 @@ public class TestSuite extends BaseTest {//extends class to call method open and
         shoppingCartPage.toCheckout();
         //click on CHECKOUT AS GUEST
         checkoutAsGuestPage.clickOnCheckoutAsGuest();
-        //ill the details on checkout page
+        //fill billing address details on checkout page after that i click on continue button
         opc_billingAddressPage.toFillBillingAddressDetail();
-        //select shipping method
+        //select shipping method after that i click on continue button
         opcShippingMethodPage.methodOfShipping();
-        //select payment method
+        //select payment method after that i click on continue button
         opcPaymentMethodPage.selectPaymentMethod();
-        //select payment information
+        //select payment information after that i click on continue button
         opcPaymentInfoPage.selectPymentInfo();
-        //confirm your order
+        //click confirm your order
         opcConfirmOrderPage.toConfirmOrder();
-        //confirm checkout completed
+        //confirm checkout completed msg
         checkoutCompletedPage.checkoutCompletedMsg();
+        //confirm is order num display
+        checkoutCompletedPage.orderNumIsDisplay();
 
 
+
+    }
+    @Test
+    public void verifyUserShouldBeAbleReferAProductToFriendByEmail(){
+
+        //click on electronics button
+        homePage.clickOnElectronicsButton();
+        //click on Camera & photo
+        electronicsPage.clickOnCameraAndPhoto();
+        //click on Leica T Mirrorless Digital Camera
+        cameraAndPhotoPage.clickOnT_MirrorDigitalCamera();
+        //click on Email a friend
+        leicaTMirrorlessDigitalCameraPage.emailAFriend();
+        //refer a product to friend
+        productEmailAFriendPage.toReferAFriend();
+        //enter my email
+        productEmailAFriendPage.enterMyEmail();
+        // to type msg
+        productEmailAFriendPage.enterPersonalMsg();
+        //to click on SEND EMAIl button
+        productEmailAFriendPage.toClickOnSENDEMAIlButton();
+
+    }
+    @Test
+    public void whenUserClickOnDETAILSUndernopCommercenewrelease_verifyUserAbleTCommentSuccessfullyAndSeeTheCommentAddedInListAtLast(){
+        //click on DETAILS under nopCommerce new release!
+        homePage.clickOnDetailButton();
+        //type title and comment and verify text, new comment successfully added
+        //verify that your comment has been added in the list at last
+        nopcommerceNewRelease.enterYourTitleAndComment();
 
     }
 }

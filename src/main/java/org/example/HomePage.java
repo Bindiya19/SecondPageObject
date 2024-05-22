@@ -27,7 +27,7 @@ public class HomePage extends Utils{
 
     private By _clickDetailButton = By.xpath("//div[@class='news-items']/div[2]/div[3]/a");
 
-    private By _TypeBrandName = By.id("small-searchterms");
+    private By _TypeBrandNameInSearchBox = By.id("small-searchterms");
 
     private By _selectEuroCurrency = By.id("customerCurrency");
 
@@ -40,6 +40,8 @@ public class HomePage extends Utils{
     private By _clickHTCAndroidADDTOCARTButton = By.xpath("//div[@class='product-grid home-page-product-grid']/div[2]/div[3]/div[1]/div[2]/div[3]/div[2]/button[1]");
 
     private By _cliclShoppingCartButton = By.xpath("//a[contains(text(),'shopping cart')]");
+
+    private By _currency = By.id("customerCurrency");
 
     //click on register button from header bar
     public void clickOnRegisterButton(){clickOnElement(_clickRegisterButton);
@@ -74,6 +76,17 @@ public class HomePage extends Utils{
 
     //method to click on Shopping Cart
     public void clickOnShoppingCart(){clickOnElement(_cliclShoppingCartButton);}
+
+    public void clickOnCategoryPage(){
+        clickOnElement(By.xpath("//a[.='Register']"));
+    }
+
+    public void clickOnButtonByGivenButtonName(String buttonName){
+        clickOnElement(By.linkText(""+buttonName+""));
+
+    }
+
+
 
     //method to get text and accept popup alert msg after click on vote
 //    public void handleAlertMsg() {
@@ -113,7 +126,7 @@ public class HomePage extends Utils{
     }
 
     //method to search any Brand in search box
-    public void typeBrandName() {typeText(_TypeBrandName,loadProp.getProperty("BrandName"));
+    public void typeBrandName(String brand_name) {typeText(_TypeBrandNameInSearchBox,(brand_name));
     }
 
     //method to verify when user euro currency all products show euro currency
@@ -136,6 +149,16 @@ public class HomePage extends Utils{
 
         for (WebElement webelement : productListContainUSDollarCurrency) {
             Assert.assertNotNull(webelement.getText(), "Product's currency does not match. ");
+        }
+    }
+    public void selectCurrency(String currency){
+        selectTextByVisibleText(_currency,currency);
+    }
+    public  void verifyEachProductContainCurrencySymbol(String currencySymbol){
+        List<WebElement> productListContainCurrencySymbol = driver.findElements(By.xpath("//div[@class='product-grid home-page-product-grid']//div[@class='prices']"));
+
+        for (WebElement webelement : productListContainCurrencySymbol) {
+            Assert.assertNotNull(webelement.getText().contains(currencySymbol), "Product's currency does not match. ");
         }
     }
 }

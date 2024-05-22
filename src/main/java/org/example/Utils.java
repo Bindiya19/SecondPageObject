@@ -6,6 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import static org.testng.Assert.assertTrue;
 
 public class Utils extends BasePage{
     //create obj to call loadProp
@@ -55,13 +58,9 @@ public class Utils extends BasePage{
     //method to accept alert
     public static void acceptAlert() {driver.switchTo().alert().accept();}
 
-
-
-    //method to check display text
-    //
-
     //method to get url
-    public static String url(){return driver.getCurrentUrl();}
+    public static void verifyURLContains(String word){
+        assertTrue(driver.getCurrentUrl().contains(word));}
 
     //method to switch to new page
     public static void handlesMultiWindow(){driver.getWindowHandles();}
